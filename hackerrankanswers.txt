@@ -1,0 +1,258 @@
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+class Sam
+{
+    String std[];
+    int rank[];
+    Sam(String std[],int rank[])
+    {
+        this.std=std;
+        this.rank=rank;
+    }
+    public String lowestRank()
+    {
+        int max=rank[0];
+        int indx=0;
+        for(int i=1;i<rank.length;i++)
+        {
+            if(max<rank[i])
+            {
+            max=rank[i];
+            indx=i;
+            }
+        }
+        return std[indx];
+    }
+    public String highestRank()
+    {
+        int min=rank[0];
+        int indx=0;
+        for(int i=1;i<rank.length;i++)
+        {
+            if(min>rank[i])
+            {
+            min=rank[i];
+            indx=i;
+            }
+        }
+        return std[indx];
+    }
+}
+class Main {
+    public static void main(String[] args) {
+        String arr[]={"sam","raj","kumar"};
+        int rank[]={1,3,2};
+       Sam sam=new Sam(arr,rank);
+       System.out.println("First :"+sam.highestRank());
+       System.out.println("Last :"+sam.lowestRank());
+    }
+}
+-----------------------------------------------------------------------
+// Online Java Compiler
+// Use this editor to write, compile and run your Java code online
+import java.util.*;
+class PasswordSanitizer {
+    public String filter(List<String> passwords) {
+        List<String> validPasswords = new ArrayList<>();
+
+        for (String password : passwords) {
+            if (password.length() >= 5 && containsLetter(password) && containsDigit(password)) {
+                validPasswords.add(password);
+            }
+        }
+        String out="";
+        for(String ans:validPasswords)
+        out+=ans+" ";
+        if(out.length()>0)
+        return out.trim(); 
+        else
+        return passwords.get(0);
+    }
+
+    private boolean containsLetter(String s) {
+        for (char c : s.toCharArray()) {
+            if (Character.isLetter(c)) return true;
+        }
+        return false;
+    }
+
+    private boolean containsDigit(String s) {
+        for (char c : s.toCharArray()) {
+            if (Character.isDigit(c)) return true;
+        }
+        return false;
+    }
+}
+
+
+public class Main {
+    public static void main(String[] args) {
+        PasswordSanitizer sanitizer = new PasswordSanitizer();
+
+        List<String> passwords = Arrays.asList(
+            "abc123",     // valid
+            "12345",      // invalid (no letter)
+            "abcde",      // invalid (no digit)
+            "a1b2c3",     // valid
+            "pass1",      // valid
+            "short",      // invalid (no digit)
+            "1a"          // invalid (too short)
+        );
+
+        String result = sanitizer.filter(passwords);
+        System.out.println("Filtered Passwords: " + result);
+    }
+}
+
+
+-----------------------------------------------------------
+import java.util.*;
+
+class Edge implements Comparable<Edge> {
+    int fromNode;
+    int toNode;
+
+    Edge(int fromNode, int toNode) {
+        this.fromNode = fromNode;
+        this.toNode = toNode;
+    }
+
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Edge edge = (Edge) obj;
+        return edge.fromNode == fromNode && toNode == edge.toNode;
+    }
+
+    public int hashCode() {
+        return Objects.hash(fromNode, toNode); // Fixed: use Objects.hash
+    }
+
+    public int compareTo(Edge obj) {
+        if (this.fromNode != obj.fromNode)
+            return Integer.compare(this.fromNode, obj.fromNode);
+        return Integer.compare(this.toNode, obj.toNode);
+    }
+
+    public String toString() {
+        return "From Node: " + fromNode + " To Node: " + toNode;
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        List<Edge> edges = new ArrayList<>();
+        edges.add(new Edge(1, 2));
+        edges.add(new Edge(3, 4));
+        edges.add(new Edge(1, 2)); // Duplicate
+        edges.add(new Edge(2, 3));
+
+        // Using HashSet to remove duplicates
+        Set<Edge> edgeSet = new HashSet<>(edges);
+        System.out.println("Unique Edges:");
+        for (Edge e : edgeSet) {
+            System.out.println(e);
+        }
+
+        // Sorting edges
+        List<Edge> sortedEdges = new ArrayList<>(edgeSet);
+        Collections.sort(sortedEdges);
+        System.out.println("\nSorted Edges:");
+        for (Edge e : sortedEdges) {
+            System.out.println(e);
+        }
+    }
+}
+-----------------------------------------------------------------------------------------------------------------------------------
+Balanced String:
+
+  private static String isBAlanced(String s)
+  {
+    Stack<Character> st=new Stack<>();
+    for(char ch:s.toCharArray())
+    {
+      if(ch=='('||ch=='{')
+      {
+        st.push(ch);
+      }
+      else if(ch==')'||ch=='}')
+      {
+        if(st.isEmpty())
+        {
+          return "false";
+        }
+        char top=st.pop();
+        if((ch==')'&& top!='(') || (ch=='}'&& top!='{'))
+        {
+          return "false";
+        }
+      }
+    }
+    return st.isEmpty()?"true":"false";
+  }
+----------------------------------------------------------------------------------------------------------------------
+  
+  Class AdditionMagic
+  {
+  public String add(double a,String b)
+  {
+  return a+b;
+  }
+  public String add(String a,String b)
+  {
+  return a+b;
+  }
+  public String add(double a,double b)
+  {
+  double c=a+b;
+  c=Math.round(c*100.0)/100.0;
+  return Double.toString(c);
+  }
+  
+  }
+  
+  -----------------------------------------------
+  SELECT 
+    fp.first_name,
+    fp.last_name,
+    fp.email,
+    jss.job_success_score
+FROM 
+    freelance_profiles fp
+JOIN 
+    job_success_scores jss
+    ON fp.id = jss.profile_id
+WHERE 
+    jss.job_success_score > 90
+    AND fp.is_verified = 1
+ORDER BY 
+    jss.job_success_score DESC,
+    fp.first_name ASC,
+    fp.last_name ASC
+ LIMIT 10;
+
+-----------------------------------------------------------------------------------------------------------------
+  
+  select w.wallets_id,sum(t.amount) from wallets w join transactions t 
+  on w.id=t.id group by t.id  count(t.id)>1 and sum(t.amount)>10;
+
+------------------------------------------------------------------------------------------------------------------
+  
+  
+  select protocol,traffic_in,traffic_out from traffic 
+  order by protocol asc;
+
+------------------------------------------------------------------------------------------------
+  
+  select c.name
+  from company c
+  join salary s on s.company_id=c.id
+  join employee e on e.id=c.employee_id
+  group by c.name
+  having avg(s.salary)>40000;
+--------------------------------------------------------------------------------------------
+
+
+
+
+
